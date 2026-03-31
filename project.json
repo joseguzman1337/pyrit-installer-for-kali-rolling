@@ -1,0 +1,47 @@
+{
+  "name": "repo-repos-pyrit-installer-for-kali-rolling",
+  "root": "repos/pyrit-installer-for-kali-rolling",
+  "projectType": "library",
+  "targets": {
+    "status": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "git -C repos/pyrit-installer-for-kali-rolling status --short || true"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "fetch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "git -C repos/pyrit-installer-for-kali-rolling fetch --all --prune || true"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "log": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "git -C repos/pyrit-installer-for-kali-rolling log --oneline -10 || true"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "manifests": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "find repos/pyrit-installer-for-kali-rolling \\( -name package.json -o -name pyproject.toml -o -name Cargo.toml -o -name go.mod -o -name setup.py \\) -not -path '*/node_modules/*' -not -path '*/testdata/*' -not -path '*/fixtures/*' -print | sort"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    }
+  },
+  "tags": [
+    "scope:repos",
+    "type:subrepo"
+  ]
+}
